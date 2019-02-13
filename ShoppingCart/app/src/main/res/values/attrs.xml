@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NumberSwitch">
+        <attr name="plusPic" format="integer" />
+        <attr name="minusPic" format="integer" />
+        <attr name="zerotext" format="string" />
+        <attr name="startvalue" format="integer" />
+    </declare-styleable>
+
+</resources>

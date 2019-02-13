@@ -1,0 +1,50 @@
+{
+  "status": 1,
+  "data": [
+    {
+      "product_id": 1,
+      "name": "boAt Rugged v3 Extra Tough Unbreakable Braproduct_ided Micro USB Cable",
+      "image": "https://sw-image-bucket.azureedge.net/thumb4/31gl2djdnam6s.jpeg",
+      "product_unique_code": "PROD123",
+      "product_mrp_price": 500,
+      "product_selling_price": 800,
+      "product_description": "Click the Buy Now button.Add the Product to the cart.No coupon code required.Make a payment."
+    },
+    {
+      "product_id": 2,
+      "name": "FADMAN ITEK BLACK 40W 40 WATT HOT MELT GUN",
+      "image": "https://sw-image-bucket.azureedge.net/thumb4/bqfppa2kl0345.jpeg",
+      "product_unique_code": "PROD124",
+      "product_mrp_price": 700,
+      "product_selling_price": 800,
+      "product_description": "Click the Buy Now button.Add the Product to the cart.No coupon code required.Make a payment."
+    },
+    {
+      "product_id": 3,
+      "name": "Fiado s460 High Bass Wireless Headphone (Black)",
+      "image": "https://sw-image-bucket.azureedge.net/thumb4/1qo806si4iim4.jpeg",
+      "product_unique_code": "PROD125",
+      "product_mrp_price": 1000,
+      "product_selling_price": 800,
+      "product_description": "Click the Buy Now button.Add the Product to the cart.No coupon code required.Make a payment."
+    },
+    {
+      "product_id": 4,
+      "name": "Four Star FS-009 Dry Iron (Black)",
+      "image": "https://sw-image-bucket.azureedge.net/thumb4/5u442i0o53a43.jpeg",
+      "product_unique_code": "PROD126",
+      "product_mrp_price": 1500,
+      "product_selling_price": 800,
+      "product_description": "Click the Buy Now button.Add the Product to the cart.No coupon code required.Make a payment."
+    },
+    {
+      "product_id": 5,
+      "name": "Asus Vivobook X540MA-GQ024T 15.6-inch Laptop",
+      "image": "https://sw-image-bucket.azureedge.net/thumb4/31gl2djdnam6s.jpeg",
+      "product_unique_code": "PROD127",
+      "product_mrp_price": 2000,
+      "product_selling_price": 35000,
+      "product_description": "Click the Buy Now button.Add the Product to the cart.No coupon code required.Make a payment."
+    }
+  ]
+}

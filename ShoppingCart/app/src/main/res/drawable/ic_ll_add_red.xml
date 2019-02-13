@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!-- drawable/circle_card_icon.xml -->
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+            <stroke android:color="#C00202" android:width="1dp"/>
+            <corners android:radius="1dp" />
+            <padding android:bottom="@dimen/d5"/>
+            <padding android:top="@dimen/d5"/>
+            <padding android:left="@dimen/d5"/>
+            <padding android:right="@dimen/d5"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_add_red_24dp" />
+</layer-list>

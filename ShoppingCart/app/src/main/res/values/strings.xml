@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ShoppingCart</string>
+    <string name="add">Add</string>
+    <string name="total_cost">Total Cost</string>
+
+    <string name="Rs">\u20B9</string>
+</resources>
