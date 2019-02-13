@@ -73,6 +73,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ViewHo
         }
 
         private void setAssets() {
+            ivPic.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
 
 
@@ -115,6 +116,13 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ViewHo
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+
+                case R.id.ivPic:
+                    if(iListener != null){
+                        iListener.onImageClicked((Data)itemView.getTag());
+                    }
+                    break;
+
                 case R.id.tvAdd:
 
                     Data mData = (Data) itemView.getTag();

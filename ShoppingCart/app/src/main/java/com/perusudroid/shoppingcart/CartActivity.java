@@ -82,4 +82,9 @@ public class CartActivity extends AppCompatActivity implements IListener {
             bottomLay.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onImageClicked(Data tag) {
+
+    }
 }

@@ -1,9 +1,11 @@
 package com.perusudroid.shoppingcart.model;
 
+import java.io.Serializable;
+
 /**
  * Awesome Pojo Generator
  */
-public class Data {
+public class Data implements Serializable {
     private String image;
     private Double product_mrp_price;
     private Double product_selected_mrp_price;

@@ -53,7 +53,14 @@ public class MainActivity extends AppCompatActivity implements IListener {
                 }
         );
 
-        setAdapter();
+        ProductResponse productResponse = new Gson().fromJson(readFromFile(), ProductResponse.class);
+        for (int i = 0; i < productResponse.getData().size(); i++) {
+            productResponse.getData().get(i).set_selected(false);
+        }
+
+        mList = productResponse.getData();
+
+        setAdapter(mList);
 
     }
 
@@ -67,14 +74,7 @@ public class MainActivity extends AppCompatActivity implements IListener {
                     mBundle.getBoolean("refresh", false)) {
                 if (CartHashMap.getInstance().getProductsSize(this) > 0) {
                     onUpdated(CartHashMap.getInstance().getSelectedProductCost(this));
-                    if (shoppingAdapter != null) {
-
-                        List<Data> mData = getComparedList(CartHashMap.getInstance().getSelectedProducts(this));
-
-                        Log.d("MainActivity", "onActivityResult: " + new Gson().toJson(mData));
-
-                        shoppingAdapter.refresh(mData, this);
-                    }
+                    parseData();
                 }
             }
 
@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity implements IListener {
         }
     }
 
-    private List<Data> getComparedList(List<Data> selectedProducts) {
+    private void parseData() {
 
-        List<Data> filteredList = new ArrayList<>();
+        List<Data> selectedProducts = CartHashMap.getInstance().getSelectedProducts(this);
 
         if (selectedProducts != null && mList != null) {
             for (int i = 0; i < mList.size(); i++) {
@@ -92,17 +92,16 @@ public class MainActivity extends AppCompatActivity implements IListener {
                 for (int y = 0; y < selectedProducts.size(); y++) {
 
                     if (selectedProducts.get(y).getProduct_id().equals(mList.get(i).getProduct_id())) {
-                        filteredList.add(selectedProducts.get(y));
+                        mList.add(selectedProducts.get(y));
                     }else{
-                        filteredList.add(mList.get(i));
+                        mList.get(i).set_selected(false);
                     }
-
                 }
-
             }
         }
 
-        return filteredList;
+        setAdapter(mList);
+
     }
 
     @Override
@@ -111,14 +110,8 @@ public class MainActivity extends AppCompatActivity implements IListener {
 
     }
 
-    private void setAdapter() {
+    private void setAdapter(List<Data> mList) {
 
-        ProductResponse productResponse = new Gson().fromJson(readFromFile(), ProductResponse.class);
-        for (int i = 0; i < productResponse.getData().size(); i++) {
-            productResponse.getData().get(i).set_selected(false);
-        }
-
-        mList = productResponse.getData();
 
         shoppingAdapter = new ShoppingAdapter(mList, this);
         recyclerView.setAdapter(shoppingAdapter);
@@ -156,4 +149,17 @@ public class MainActivity extends AppCompatActivity implements IListener {
             bottomLay.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onImageClicked(Data tag) {
+
+        if (tag.getProduct_selected_qty() == null) {
+            tag.setProduct_selected_qty(1);
+        }
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("data", tag);
+        startActivityForResult(intent, 100);
+    }
+
 }
