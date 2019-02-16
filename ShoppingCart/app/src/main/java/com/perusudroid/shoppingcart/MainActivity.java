@@ -1,5 +1,7 @@
 package com.perusudroid.shoppingcart;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements IListener {
     private TextView tvCost;
     private ConstraintLayout bottomLay;
     List<Data> mList = new ArrayList<>();
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +72,15 @@ public class MainActivity extends AppCompatActivity implements IListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && data != null) {
 
+
             Bundle mBundle = data.getExtras();
             if (mBundle != null &&
                     mBundle.getBoolean("refresh", false)) {
                 if (CartHashMap.getInstance().getProductsSize(this) > 0) {
                     onUpdated(CartHashMap.getInstance().getSelectedProductCost(this));
                     parseData();
+                } else {
+                    Log.e(TAG, "onActivityResult: " + CartHashMap.getInstance().getProductsSize(this));
                 }
             }
 
@@ -86,20 +92,22 @@ public class MainActivity extends AppCompatActivity implements IListener {
 
         List<Data> selectedProducts = CartHashMap.getInstance().getSelectedProducts(this);
 
-        if (selectedProducts != null && mList != null) {
-            for (int i = 0; i < mList.size(); i++) {
+        Log.d(TAG, "parseData: exist list " + mList.size() + " selectedProducts " + selectedProducts.size());
 
-                for (int y = 0; y < selectedProducts.size(); y++) {
+        for (int i = 0; i < mList.size(); i++) {
+            Log.d(TAG, "parseData: mList " + mList.get(i).getProduct_id());
 
-                    if (selectedProducts.get(y).getProduct_id().equals(mList.get(i).getProduct_id())) {
-                        mList.add(selectedProducts.get(y));
-                    }else{
-                        mList.get(i).set_selected(false);
-                    }
+            for (int y = 0; y < selectedProducts.size(); y++) {
+                Log.d(TAG, "parseData: selectedProducts " + selectedProducts.get(y).getProduct_id());
+
+                if (mList.get(i).getProduct_id().equals(selectedProducts.get(y).getProduct_id())) {
+                    Log.d(TAG, "parseData: is_equal " + mList.get(i).getProduct_id());
+                    mList.set(i, selectedProducts.get(y));
+                } else {
+                    mList.get(i).set_selected(false);
                 }
             }
         }
-
         setAdapter(mList);
 
     }
@@ -160,6 +168,53 @@ public class MainActivity extends AppCompatActivity implements IListener {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("data", tag);
         startActivityForResult(intent, 100);
+    }
+
+    @Override
+    public void showAlert(final Data mData, final int adapterPosition) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure to remove this product?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        CartHashMap.getInstance().removeByProductId(mData.getProduct_id(), MainActivity.this, adapterPosition);
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    @Override
+    public void onRemoved(Double selectedProductCost, int size, final int position) {
+        if (selectedProductCost > 0) {
+            tvCost.setText(String.format(Locale.getDefault(), "%s%s", getString(R.string.Rs), selectedProductCost));
+            bottomLay.setVisibility(View.VISIBLE);
+        } else {
+            bottomLay.setVisibility(View.GONE);
+        }
+        runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        mList.get(position).set_selected(false);
+                        shoppingAdapter.notifyItemChanged(position);
+                    }
+                }
+        );
+
     }
 
 }

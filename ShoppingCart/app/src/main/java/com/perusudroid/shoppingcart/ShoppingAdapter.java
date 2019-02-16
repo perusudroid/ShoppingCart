@@ -2,6 +2,7 @@ package com.perusudroid.shoppingcart;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,14 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ViewHo
                         public void onValueChanged(int value, NumberSwitch.ValueType valueType) {
                             Data mData = (Data) itemView.getTag();
 
+                            if(value == 0){
+                                iListener.showAlert(mData, getAdapterPosition());
+                                numberSwitch.setCount(1);
+                                return;
+                            }
+
+                            Log.d("ShoppingAdapter", "onValueChanged: value "+ value);
+
                             mData.set_selected(true);
                             mData.setProduct_mrp_price(mData.getProduct_mrp_price());
                             mData.setProduct_selected_qty(value);
@@ -124,7 +133,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ViewHo
                     break;
 
                 case R.id.tvAdd:
-
+                    numberSwitch.setCount(1);
                     Data mData = (Data) itemView.getTag();
                     mData.set_selected(true);
                     mData.setProduct_selected_qty(1);
@@ -132,7 +141,6 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ViewHo
                     mData.setProduct_selected_mrp_price(mData.getProduct_mrp_price() * 1);
                     notifyItemChanged(getAdapterPosition());
                     CartHashMap.getInstance().addrUpdateProductInfo(mData, itemView.getContext());
-
                     tvAdd.setVisibility(View.GONE);
                     break;
             }

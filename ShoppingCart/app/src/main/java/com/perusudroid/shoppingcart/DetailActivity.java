@@ -80,6 +80,16 @@ public class DetailActivity extends AppCompatActivity implements IListener{
     }
 
     @Override
+    public void showAlert(Data mData, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onRemoved(Double selectedProductCost, int size, int productsSize) {
+
+    }
+
+    @Override
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra("refresh", true);

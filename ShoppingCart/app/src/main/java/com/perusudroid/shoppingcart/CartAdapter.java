@@ -76,13 +76,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                         public void onValueChanged(int value, NumberSwitch.ValueType valueType) {
                             Data mData = (Data) itemView.getTag();
 
-                            Log.d("CartAdapter", "onValueChanged: cartValue "+ new Gson().toJson(mData));
+                            Log.d("CartAdapter", "onValueChanged: value "+ value);
 
-                            mData.set_selected(true);
-                            mData.setProduct_selected_qty(value);
-                            mData.setProduct_selected_mrp_price(mData.getProduct_mrp_price() * value);
+                            if (value > 0) {
 
-                            CartHashMap.getInstance().addrUpdateProductInfo(mData, itemView.getContext());
+                                Log.d("CartAdapter", "onValueChanged: cartValue "+ new Gson().toJson(mData));
+
+                                mData.set_selected(true);
+                                mData.setProduct_selected_qty(value);
+                                mData.setProduct_selected_mrp_price(mData.getProduct_mrp_price() * value);
+
+                                CartHashMap.getInstance().addrUpdateProductInfo(mData, itemView.getContext());
+                            }else{
+                                iListener.showAlert(mData, getAdapterPosition());
+                            }
                         }
                     }
             );

@@ -199,4 +199,19 @@ public class CartHashMap {
     }
 
 
+    public void removeByProductId(Integer product_id, Context context, int adapterPosition) {
+        Carteasy cs = new Carteasy();
+        cs.RemoveId(String.valueOf(product_id), context);
+        if(iListener != null){
+            iListener.onRemoved(getSelectedProductCost(context), getProductsSize(context),adapterPosition);
+        }
+    }
+
+    public void clearCart(Context context) {
+        Carteasy cs = new Carteasy();
+        cs.clearCart(context);
+    }
+
+
+
 }

@@ -87,4 +87,14 @@ public class CartActivity extends AppCompatActivity implements IListener {
     public void onImageClicked(Data tag) {
 
     }
+
+    @Override
+    public void showAlert(Data mData, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onRemoved(Double selectedProductCost, int size, int productsSize) {
+
+    }
 }
