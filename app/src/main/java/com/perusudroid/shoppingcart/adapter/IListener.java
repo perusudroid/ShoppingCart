@@ -1,4 +1,4 @@
-package com.perusudroid.shoppingcart;
+package com.perusudroid.shoppingcart.adapter;
 
 import com.perusudroid.shoppingcart.model.Data;
 

@@ -1,4 +1,4 @@
-package com.perusudroid.shoppingcart;
+package com.perusudroid.shoppingcart.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,6 +14,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.perusudroid.shoppingcart.helper.CartHashMap;
+import com.perusudroid.shoppingcart.R;
+import com.perusudroid.shoppingcart.adapter.IListener;
+import com.perusudroid.shoppingcart.adapter.ShoppingAdapter;
 import com.perusudroid.shoppingcart.model.Data;
 import com.perusudroid.shoppingcart.model.ProductResponse;
 
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IListener {
     private TextView tvCost;
     private ConstraintLayout bottomLay;
     List<Data> mList = new ArrayList<>();
-    private String TAG = "MainActivity";
+    private String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements IListener {
                 }
             }
         }
+        //set adapter
         setAdapter(mList);
 
     }
@@ -115,11 +120,15 @@ public class MainActivity extends AppCompatActivity implements IListener {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: size " + CartHashMap.getInstance().getProductsSize(this));
+        if (CartHashMap.getInstance().getProductsSize(this) > 0) {
+            parseData();
+            onUpdated(CartHashMap.getInstance().getSelectedProductCost(this));
+        }
 
     }
 
     private void setAdapter(List<Data> mList) {
-
 
         shoppingAdapter = new ShoppingAdapter(mList, this);
         recyclerView.setAdapter(shoppingAdapter);

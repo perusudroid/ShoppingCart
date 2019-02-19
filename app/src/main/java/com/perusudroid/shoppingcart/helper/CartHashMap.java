@@ -1,9 +1,10 @@
-package com.perusudroid.shoppingcart;
+package com.perusudroid.shoppingcart.helper;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.carteasy.v1.lib.Carteasy;
+import com.perusudroid.shoppingcart.adapter.IListener;
 import com.perusudroid.shoppingcart.model.Data;
 
 import java.util.ArrayList;

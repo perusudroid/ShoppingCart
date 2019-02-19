@@ -1,4 +1,4 @@
-package com.perusudroid.shoppingcart;
+package com.perusudroid.shoppingcart.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.perusudroid.shoppingcart.helper.CartHashMap;
+import com.perusudroid.shoppingcart.R;
+import com.perusudroid.shoppingcart.adapter.CartAdapter;
+import com.perusudroid.shoppingcart.adapter.IListener;
 import com.perusudroid.shoppingcart.model.Data;
 
 import java.util.List;

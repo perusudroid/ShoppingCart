@@ -1,4 +1,4 @@
-package com.perusudroid.shoppingcart;
+package com.perusudroid.shoppingcart.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,10 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.perusudroid.numberswitcher.NumberSwitch;
+import com.perusudroid.shoppingcart.helper.CartHashMap;
+import com.perusudroid.shoppingcart.R;
+import com.perusudroid.shoppingcart.adapter.IListener;
 import com.perusudroid.shoppingcart.model.Data;
 
-public class DetailActivity extends AppCompatActivity implements IListener{
-
+public class DetailActivity extends AppCompatActivity implements IListener {
 
     private NumberSwitch numberSwitch;
     private ImageView ivPic;
