@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,14 +35,22 @@ public class CartActivity extends AppCompatActivity implements IListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         bindViews();
+        setAssets();
         doSetLocalData();
     }
+
 
     private void bindViews() {
         recyclerView = findViewById(R.id.recyclerView);
         tvCost = findViewById(R.id.tvCost);
         bottomLay = findViewById(R.id.bottomLay);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+
+    private void setAssets() {
+        getSupportActionBar().setTitle("Cart");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void doSetLocalData() {
@@ -58,6 +67,20 @@ public class CartActivity extends AppCompatActivity implements IListener {
             Toast.makeText(this, "Cart Empty", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onResume() {

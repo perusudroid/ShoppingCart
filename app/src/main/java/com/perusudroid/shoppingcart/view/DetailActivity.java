@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +47,10 @@ public class DetailActivity extends AppCompatActivity implements IListener {
     }
 
     private void setAssets() {
+
+        getSupportActionBar().setTitle("Detail");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (data != null) {
 
             cartHashMap = new CartHashMap();
@@ -70,6 +75,18 @@ public class DetailActivity extends AppCompatActivity implements IListener {
                     }
                 }
         );
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

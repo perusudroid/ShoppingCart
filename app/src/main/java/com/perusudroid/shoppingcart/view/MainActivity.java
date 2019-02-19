@@ -14,10 +14,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.perusudroid.shoppingcart.helper.CartHashMap;
 import com.perusudroid.shoppingcart.R;
 import com.perusudroid.shoppingcart.adapter.IListener;
 import com.perusudroid.shoppingcart.adapter.ShoppingAdapter;
+import com.perusudroid.shoppingcart.helper.CartHashMap;
 import com.perusudroid.shoppingcart.model.Data;
 import com.perusudroid.shoppingcart.model.ProductResponse;
 
@@ -43,13 +43,15 @@ public class MainActivity extends AppCompatActivity implements IListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bindViews();
+        setAssets();
+        doSetLocalData();
+    }
 
-        tvCost = findViewById(R.id.tvCost);
-        bottomLay = findViewById(R.id.bottomLay);
-        recyclerView = findViewById(R.id.recyclerView);
-        // recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    private void setAssets() {
+
+        getSupportActionBar().setTitle("Products");
 
         bottomLay.setOnClickListener(
                 new View.OnClickListener() {
@@ -59,7 +61,9 @@ public class MainActivity extends AppCompatActivity implements IListener {
                     }
                 }
         );
+    }
 
+    private void doSetLocalData() {
         ProductResponse productResponse = new Gson().fromJson(readFromFile(), ProductResponse.class);
         for (int i = 0; i < productResponse.getData().size(); i++) {
             productResponse.getData().get(i).set_selected(false);
@@ -68,6 +72,16 @@ public class MainActivity extends AppCompatActivity implements IListener {
         mList = productResponse.getData();
 
         setAdapter(mList);
+    }
+
+    private void bindViews() {
+
+        tvCost = findViewById(R.id.tvCost);
+        bottomLay = findViewById(R.id.bottomLay);
+        recyclerView = findViewById(R.id.recyclerView);
+        // recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 
