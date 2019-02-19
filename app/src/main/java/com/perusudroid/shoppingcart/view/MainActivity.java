@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements IListener {
                 if (mList.get(i).getProduct_id().equals(selectedProducts.get(y).getProduct_id())) {
                     Log.d(TAG, "parseData: is_equal " + mList.get(i).getProduct_id());
                     mList.set(i, selectedProducts.get(y));
-                } else {
-                    mList.get(i).set_selected(false);
                 }
             }
         }
